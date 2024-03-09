@@ -9,8 +9,10 @@ let rightPressed = false;
 let leftPressed = false;
 
 const ball = new Ball(ctx, canvas.width/2, canvas.height-30, 2, -2, 10);
-const paddle = new Paddle(ctx, (canvas.width-75)/2, canvas.height-10, 75, 10);
-
+const paddleWidth = canvas.width * 0.1; // 캔버스 너비의 10%로 설정
+const paddleHeight = 10;
+const paddleX = (canvas.width - paddleWidth) / 2;
+const paddle = new Paddle(ctx, paddleWidth, paddleHeight, paddleX, canvas.width);
 document.addEventListener("keydown", keyDownHandler, false);
 document.addEventListener("keyup", keyUpHandler, false);
 
