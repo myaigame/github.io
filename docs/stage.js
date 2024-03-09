@@ -1,3 +1,4 @@
+// stage.js 수정된 코드
 import { Ball } from './ball.js';
 import { Paddle } from './paddle.js';
 import { checkBallPaddleCollision } from './collision.js';
@@ -7,8 +8,8 @@ const ctx = canvas.getContext('2d');
 let rightPressed = false;
 let leftPressed = false;
 
-const ball = new Ball(canvas.width/2, canvas.height-30, 2, -2, 10);
-const paddle = new Paddle((canvas.width-75)/2, canvas.height-10, 75, 10);
+const ball = new Ball(ctx, canvas.width/2, canvas.height-30, 2, -2, 10);
+const paddle = new Paddle(ctx, (canvas.width-75)/2, canvas.height-10, 75, 10);
 
 document.addEventListener("keydown", keyDownHandler, false);
 document.addEventListener("keyup", keyUpHandler, false);
@@ -31,8 +32,8 @@ function keyUpHandler(e) {
 
 function draw() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    ball.draw(ctx);
-    paddle.draw(ctx);
+    ball.draw();
+    paddle.draw();
 
     if(checkBallPaddleCollision(ball, paddle)) {
         ball.dy = -ball.dy;
