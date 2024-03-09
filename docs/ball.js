@@ -10,7 +10,7 @@ export class Ball {
 
     draw() {
         this.ctx.beginPath();
-        this.ctx.arc(this.x, this.y, this.radius, 0, Math.PI*2);
+        this.ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
         this.ctx.fillStyle = "#0095DD";
         this.ctx.fill();
         this.ctx.closePath();
@@ -19,13 +19,11 @@ export class Ball {
     update() {
         this.x += this.dx;
         this.y += this.dy;
-    }
 
-    collisionCanvas(width, height) {
-        if(this.x + this.dx > width - this.radius || this.x + this.dx < this.radius) {
+        if(this.x + this.dx > this.ctx.canvas.width-this.radius || this.x + this.dx < this.radius) {
             this.dx = -this.dx;
         }
-        if(this.y + this.dy < this.radius) {
+        if(this.y + this.dy > this.ctx.canvas.height-this.radius || this.y + this.dy < this.radius) {
             this.dy = -this.dy;
         }
     }
