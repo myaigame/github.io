@@ -8,10 +8,9 @@ const canvas = document.getElementById('gameCanvas');
 const ctx = canvas.getContext('2d');
 let rightPressed = false;
 let leftPressed = false;
-let gameIsOver = false; // 게임 오버 상태 추가
 
 const ball = new Ball(ctx, canvas.width/2, canvas.height-30, 2, -2, 10);
-const paddleWidth = canvas.width * 0.1;
+const paddleWidth = canvas.width * 0.1; // 캔버스 너비의 10%로 설정된 패들 너비
 const paddleHeight = 10;
 const paddleX = (canvas.width - paddleWidth) / 2;
 const paddle = new Paddle(ctx, paddleWidth, paddleHeight, paddleX, canvas.width);
@@ -36,26 +35,21 @@ function keyUpHandler(e) {
 }
 
 function draw() {
-    if (!gameIsOver) {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        ball.draw();
-        paddle.draw();
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ball.draw();
+    paddle.draw();
 
-        if(checkBallPaddleCollision(ball, paddle)) {
-            ball.dy = -ball.dy;
-        }
-
-        if (ball.y + ball.dy > canvas.height - ball.radius) { // 공이 아래쪽 경계를 넘어갈 때
-            gameIsOver = true;
-            gameOver(ctx, canvas); // 게임 오버 처리
-            return; // 게임 루프 종료
-        }
-
-        ball.update();
-        paddle.update(rightPressed, leftPressed);
-
-        requestAnimationFrame(draw);
+    if(checkBallPaddleCollision(ball, paddle)) {
+        ball.dy = -ball.dy;
+    } else if (ball.y + ball.dy > canvas.height - ball.radius) {
+        gameOver(ctx, canvas); // 게임 오버 처리
+        return; // 게임 루프 종료
     }
+
+    ball.update();
+    paddle.update(rightPressed, leftPressed);
+
+    requestAnimationFrame(draw);
 }
 
 draw();
