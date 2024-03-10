@@ -43,8 +43,10 @@ function draw() {
 
         if(checkBallPaddleCollision(ball, paddle)) {
             ball.dy = -ball.dy;
-        } else if (ball.y + ball.dy > canvas.height - ball.radius) { // 공이 아래쪽 경계를 넘어갈 때
-            gameIsOver = true; // 게임 오버 상태를 true로 설정
+        }
+
+        if (ball.y + ball.dy > canvas.height - ball.radius) { // 공이 아래쪽 경계를 넘어갈 때
+            gameIsOver = true;
             gameOver(ctx, canvas); // 게임 오버 처리
             return; // 게임 루프 종료
         }
