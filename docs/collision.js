@@ -1,9 +1,7 @@
-// collision.js
-
 export function checkBallPaddleCollision(ball, paddle) {
-    // 패들의 y 위치를 조정: 바닥에서 21픽셀 띄운 위치 반영
-    let paddleYAdjusted = paddle.y - 21;
-    if (ball.y + ball.dy > paddleYAdjusted - ball.radius && 
+    // 패들의 실제 상단 위치를 정확히 계산
+    let paddleTopEdgeY = paddle.y - paddle.height - 21; // 패들 높이와 바닥 간격 고려
+    if (ball.y + ball.dy + ball.radius > paddleTopEdgeY && 
         ball.x > paddle.x && 
         ball.x < paddle.x + paddle.width) {
         return true;
