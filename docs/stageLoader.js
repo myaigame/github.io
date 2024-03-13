@@ -8,7 +8,20 @@ let leftPressed = false;
 let bricks = [];
 let score = 0;
 let ballRadius;
-let gameSettings.brickWidth = canvas.width / gameSettings.brickColumnCount - gameSettings.brickPadding;
+function loadStage(stageNumber) {
+    const config = stageConfigs.find(config => config.stage === stageNumber);
+    
+    // 스테이지에 따른 설정 적용
+    // 예시: config에서 받아온 값으로 설정을 업데이트
+    ballRadius = config.ballSize;
+    dx = config.ballSpeed.dx;
+    dy = config.ballSpeed.dy;
+
+    // 게임 설정에 따라 brickWidth 값을 설정
+    gameSettings.brickWidth = canvas.width / gameSettings.brickColumnCount - gameSettings.brickPadding;
+
+    // 나머지 게임 초기화 코드...
+    // 벽돌 배열 초기화, 게임 상태 초기화 등
 
 // 키보드 이벤트 핸들러
 function keyDownHandler(e) {
